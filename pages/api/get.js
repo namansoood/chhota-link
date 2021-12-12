@@ -1,9 +1,10 @@
 import { connectToDatabase } from '../../utils/mongodb'
-import { make } from '../../utils/record'
+import { make, countClick } from '../../utils/record'
 
 export default async (req, res) => {
   let url = req.query.url
   let short = req.query.short
+  let visit = req.query.visit;
 
   let { db } = await connectToDatabase();
 
@@ -11,7 +12,7 @@ export default async (req, res) => {
     // read existing record of url
     let matches = await db
       .collection('primary')
-      .find({ originalUrl: { $eq: url } })
+      .find({ destination: { $eq: url } })
       .toArray();
 
     let existing = matches[0]
@@ -36,6 +37,11 @@ export default async (req, res) => {
 
     // respond with existing record, otherwise throw 404
     if (existing) {
+      if (visit === "true") {
+        await db.collection('primary')
+          .updateOne({ hashed: { $eq: short } }, { $set: countClick(existing) });
+      }
+
       res.status(200).json(existing)
     } else {
       res.status(404).json({ message: "Record not found with id '" + short + "'" })

@@ -4,19 +4,22 @@ const origin = dev ? 'http://localhost:3001' : 'https://your_deployment.server.c
 
 export async function getServerSideProps(context) {
     console.log("context", context);
-    const res = await fetch(`${origin}/api/get?short=${context.query.short}`)
+    const res = await fetch(`${origin}/api/get?short=${context.query.short}&visit=true`)
     const data = await res.json()
-    if (!data) {
+    if (data.destination) {
         return {
             redirect: {
-                destination: '/',
+                destination: data.destination,
                 permanent: false,
             },
         }
     }
 
     return {
-        props: {}, // will be passed to the page component as props
+        redirect: {
+            destination: "/",
+            permanent: false,
+        },
     }
 }
 

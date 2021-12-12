@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import styles from "./ResultLoader.module.css"
+import styles from "./ResultLoader.module.css";
+import { toAbsoluteUrl } from "../utils/record";
+
+import copy from 'copy-to-clipboard';
+import * as Unicons from '@iconscout/react-unicons';
 
 export default function ResultLoader(props) {
     let [loading, setLoading] = useState(false)
     let [state, setState] = useState(undefined)
+    let [copied, setCopied] = useState(false)
 
     let run = () => {
         setState(undefined);
@@ -15,7 +20,30 @@ export default function ResultLoader(props) {
 
     useEffect(run, [])
     useEffect(run, [props.url])
+    useEffect(() => {
+        if (copied) {
+            setTimeout(() => {
+                setCopied(false)
+            }, 1500)
+        }
+    }, [copied])
 
-    return (state || loading ? <div className={styles.main}> {state ? <>{JSON.stringify(state)}</> : <>Loading...</>
-    }</div > : <></>)
+    return (state || loading ?
+        <div className={styles.main}>
+            {
+                state ?
+                    <>
+                        {state.destination} {' = '} <a href={"/" + state.hashed}>{toAbsoluteUrl(state)}</a>
+                        <button
+                            className={styles.button}
+                            onClick={e => {
+                                setCopied(true);
+                                copy(toAbsoluteUrl(state))
+                            }}>
+                            {!copied ? <Unicons.UilCopy size={16} /> : <Unicons.UilCheck size={16} />}
+                        </button>
+                    </>
+                    :
+                    <>Loading...</>
+            }</div > : <></>)
 }
