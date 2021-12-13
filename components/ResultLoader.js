@@ -33,7 +33,7 @@ export default function ResultLoader(props) {
             {
                 state ?
                     <>
-                        {state.destination} {' = '} <a href={"/" + state.hashed}>{toAbsoluteUrl(state)}</a>
+                        <a href={"/" + state.hashed}>{toAbsoluteUrl(state)}</a>
                         <button
                             className={styles.button}
                             onClick={e => {
