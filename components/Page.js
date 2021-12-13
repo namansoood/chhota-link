@@ -4,7 +4,7 @@ import styles from "./Page.module.css"
 export default function MainPage(props) {
     return (<>
         <Head>
-            <title>Naman's URL Shortner</title>
+            <title>Chhota Link - URL shortner.</title>
             <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className={styles.container}>
