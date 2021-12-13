@@ -9,6 +9,14 @@ export default async (req, res) => {
   let { db } = await connectToDatabase();
 
   if (url) {
+    // validate passed url
+    try {
+      new URL(url);
+    } catch (_) {
+      res.status(400).json({ message: "Invalid URL passed." })
+      return false;
+    }
+
     // read existing record of url
     let matches = await db
       .collection('primary')
@@ -47,6 +55,6 @@ export default async (req, res) => {
       res.status(404).json({ message: "Record not found with id '" + short + "'" })
     }
   } else {
-    res.status(401).json({ message: "Missing 'url' query param" })
+    res.status(400).json({ message: "Missing 'url' query param" })
   }
 }
