@@ -20,8 +20,8 @@ export default function ResultLoader(props) {
             setLoading(true)
             fetch("/api/get?url=" + props.url)
                 .then(res => {
-                    let json = res.json();
-                    json.then(json => {
+                    setLoading(false);
+                    res.json().then(json => {
                         if (res.code === 200) {
                             setData(json)
                         } else {
