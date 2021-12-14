@@ -21,18 +21,22 @@ export default function ResultLoader(props) {
             fetch("/api/get?url=" + props.url)
                 .then(res => {
                     setLoading(false);
- if (res.code === 200) {
-                    res.json().then(json => {
-                       
+                    if (res.code === 200) {
+                        res.json().then(json => {
+
                             setData(json)
-                        
-                    })
-} else {res.json().then(json => {
+
+                        })
+                    } else {
+                        res.json().then(json => {
                             console.log("ERROR:", json.message)
                             setError(json.message)
-                      } ).catch(_ => setError("Something went wrong"))}
-                
+                        }).catch(_ => setError("Something went wrong"))
+                    }
+
+                })
         }
+
     }
 
     useEffect(run, [])
