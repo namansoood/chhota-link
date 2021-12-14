@@ -30,8 +30,8 @@ export default function ResultLoader(props) {
 } else {res.json().then(json => {
                             console.log("ERROR:", json.message)
                             setError(json.message)
-                      } ).catch(_ => setError("Something went wrong")))} }
-                })
+                      } ).catch(_ => setError("Something went wrong"))
+                
         }
     }
 
