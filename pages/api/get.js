@@ -50,7 +50,7 @@ export default async (req, res) => {
           .updateOne({ hashed: { $eq: short } }, { $set: countClick(existing) });
       }
 
-      res.status(200).json({ ...make(), ...existing })
+      res.status(200).json({ ...make(""), ...existing })
     } else {
       res.status(404).json({ message: "Record not found with id '" + short + "'" })
     }
