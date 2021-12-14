@@ -7,7 +7,8 @@ export function make(url) {
         hashed: shortId.generate(),
         createdAt: Date.now(),
         lastVisitedAt: null,
-        clicks: []
+        clicks: [],
+        private: false,
     }
 }
 
