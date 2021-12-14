@@ -62,6 +62,6 @@ export default function ResultLoader(props) {
                     </> : error ? <>{error}</> : null
                     : <>Loading...</>
             }
-        </div >
+        </div>
         : null)
 }
