@@ -21,19 +21,15 @@ export default function ResultLoader(props) {
             fetch("/api/get?url=" + props.url)
                 .then(res => {
                     setLoading(false);
-                    if (res.code === 200) {
+                    if (res.status === 200) {
                         res.json().then(json => {
-
                             setData(json)
-
-                        })
+                        }).catch(_ => setError("Something went wrong"))
                     } else {
                         res.json().then(json => {
-                            console.log("ERROR:", json.message)
                             setError(json.message)
                         }).catch(_ => setError("Something went wrong"))
                     }
-
                 })
         }
 
@@ -65,5 +61,7 @@ export default function ResultLoader(props) {
                         </button>
                     </> : error ? <>{error}</> : null
                     : <>Loading...</>
-            }</div > : null)
+            }
+        </div >
+        : null)
 }
