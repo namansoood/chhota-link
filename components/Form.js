@@ -7,8 +7,10 @@ export default function (props) {
     return <>
         <form className={styles.form} onSubmit={e => {
             e.preventDefault()
-            props.onSubmit(value)
-            setValue("")
+            if (value !== "") {
+                props.onSubmit(value)
+                setValue("")
+            }
         }}>
             <input className={styles.input} onChange={e => setValue(e.currentTarget.value)} value={value} placeholder="Paste a link to shorten it" />
             <button type="submit" className={styles.button}>Do Your Magic</button>
