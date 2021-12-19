@@ -22,3 +22,30 @@ export function countClick(record) {
 export function toAbsoluteUrl(record) {
     return window.location.origin + "/" + record.hashed
 }
+
+export function getWeeklyTrend(data) {
+    let daily = data.clicks.reduce((acc, value) => {
+        let date = new Date(value);
+        if (acc[acc.length - 1]) {
+            let date2 = new Date(acc[acc.length - 1][0]);
+            if (date2.getFullYear() === date.getFullYear() &&
+                date2.getMonth() === date.getMonth() &&
+                date2.getDay() === date.getDay()) {
+                acc[acc.length - 1].push(value)
+            } else {
+                acc.push([value])
+            }
+        } else {
+            acc.push([value])
+        }
+        return acc;
+    }, []).map(clicks => clicks.length)
+
+    let padding = Array.from({ length: 7 - daily.length > 0 ? 7 - daily.length : 0 }, () => 0);
+    let trend = padding.concat(daily);
+
+    console.log("clicks: ", data.clicks)
+    console.log("trend: ", trend)
+
+    return trend;
+}

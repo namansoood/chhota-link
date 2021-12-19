@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./ResultLoader.module.css";
-import { toAbsoluteUrl } from "../utils/record";
+import { toAbsoluteUrl, getWeeklyTrend } from "../utils/record";
 
 import Trend from "react-trend"
 
@@ -12,8 +12,6 @@ export default function ResultLoader(props) {
     let [data, setData] = useState(undefined)
     let [error, setError] = useState(undefined)
     let [copied, setCopied] = useState(false)
-
-    let trend = Array.from({ length: 10 }, () => Math.floor(Math.random() * 9));;
 
     let run = () => {
         setData(undefined);
@@ -59,13 +57,13 @@ export default function ResultLoader(props) {
                         <div className={styles.short}>
                             <a href={"/" + data.hashed}>{toAbsoluteUrl(data)}</a>
                         </div>
-                        <div className={styles.trend}>
+                        <div className={styles.trend} title="Trend">
                             <Trend
                                 smooth
                                 autoDraw
                                 autoDrawDuration={3000}
                                 autoDrawEasing="ease-out"
-                                data={trend}
+                                data={getWeeklyTrend(data)}
                                 gradient={['#4743FF', '#8B62FF']}
                                 radius={10}
                                 strokeWidth={6}
@@ -73,6 +71,7 @@ export default function ResultLoader(props) {
                         </div>
                         <div className={styles.copy}>
                             <button
+                                title="Copy Link"
                                 className={styles.button}
                                 onClick={e => {
                                     setCopied(true);
