@@ -32,7 +32,6 @@ export default function ResultLoader(props) {
                     }
                 })
         }
-
     }
 
     useEffect(run, [])
@@ -47,6 +46,9 @@ export default function ResultLoader(props) {
 
     return (data || loading || error ?
         <div className={styles.main}>
+            <div className={styles.icon}>
+                {data || error ? (data ? null : <Unicons.UilExclamationTriangle size={20} />) : <Unicons.UilSpinnerAlt className={styles.spinner} size={20} />}
+            </div>
             {
                 data || error ?
                     data ? <>
@@ -59,8 +61,8 @@ export default function ResultLoader(props) {
                             }}>
                             {!copied ? <Unicons.UilCopy size={20} /> : <Unicons.UilCheck size={20} />}
                         </button>
-                    </> : error ? <><Unicons.UilExclamationTriangle size={20} /> <div>{error}</div></> : null
-                    : <><Unicons.UilSpinnerAlt className={styles.spinner} size={20} /> <div>Loading...</div></>
+                    </> : error ? <><div>{error}</div></> : null
+                    : <> <div>Loading...</div></>
             }
         </div>
         : null)

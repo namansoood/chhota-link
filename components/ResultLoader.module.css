@@ -23,6 +23,12 @@
     border: none;
     cursor: pointer;
 }
+
+.main > .icon:not(:empty) {
+    padding: 8px 0;
+    box-sizing: content-box;
+}
+
 .main button:hover {
     background-color: #EFEAFF;
 }
