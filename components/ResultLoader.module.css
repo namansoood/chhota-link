@@ -2,4 +2,9 @@
     width: 100%;
     color: red;
     padding: 12px;
+    display: flex;
+}
+.main a {
+    flex-grow: 1;
+    text-align: left;
 }

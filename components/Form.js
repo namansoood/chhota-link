@@ -10,7 +10,7 @@ export default function (props) {
             props.onSubmit(value)
             setValue("")
         }}>
-            <input className={styles.input} onChange={e => setValue(e.currentTarget.value)} value={value} placeholder="eg. https://namansood.com/" />
+            <input className={styles.input} onChange={e => setValue(e.currentTarget.value)} value={value} placeholder="Paste a link to shorten it" />
             <button type="submit" className={styles.button}>Do Your Magic</button>
         </form>
     </>
