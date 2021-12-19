@@ -61,7 +61,7 @@ export default function ResultLoader(props) {
                             <Trend
                                 smooth
                                 autoDraw
-                                autoDrawDuration={3000}
+                                autoDrawDuration={1500}
                                 autoDrawEasing="ease-out"
                                 data={getWeeklyTrend(data)}
                                 gradient={['#4743FF', '#8B62FF']}
