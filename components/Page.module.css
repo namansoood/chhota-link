@@ -18,14 +18,22 @@
     gap: 29px;
     overflow: hidden;
 }
-@media screen and (max-width: 768px) {
-    .main {
-        width: 100%;
-    }
-}
 
 .footer {
     padding: 12px;
     font-size: 16px;
     text-align: center;
+}
+@media screen and (max-width: 768px) {
+    .main {
+        width: 100%;
+    }
+    .footer {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 375px) {
+    .footer {
+        font-size: 12px;
+    }
 }
