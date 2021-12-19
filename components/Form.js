@@ -11,7 +11,8 @@ export default function (props) {
             if (value !== "") {
                 props.onSubmit(value);
                 setValue("");
-            } else if (inputRef.current !== null) {
+            }
+            if (inputRef.current !== null) {
                 inputRef.current.focus();
             }
         }}>

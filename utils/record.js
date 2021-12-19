@@ -26,8 +26,9 @@ export function toAbsoluteUrl(record) {
 export function getWeeklyTrend(data) {
     let daily = data.clicks.reduce((acc, value) => {
         let date = new Date(value);
-        if (acc[acc.length - 1]) {
-            let date2 = new Date(acc[acc.length - 1][0]);
+        let last = acc[acc.length - 1]
+        if (last) {
+            let date2 = new Date(last[0]);
             if (date2.getFullYear() === date.getFullYear() &&
                 date2.getMonth() === date.getMonth() &&
                 date2.getDay() === date.getDay()) {
@@ -44,8 +45,8 @@ export function getWeeklyTrend(data) {
     let padding = Array.from({ length: 7 - daily.length > 0 ? 7 - daily.length : 0 }, () => 0);
     let trend = padding.concat(daily);
 
-    console.log("clicks: ", data.clicks)
-    console.log("trend: ", trend)
+    console.log(data.destination, "clicks: ", data.clicks)
+    console.log(data.destination, "trend: ", trend)
 
     return trend;
 }
