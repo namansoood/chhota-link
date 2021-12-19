@@ -60,7 +60,7 @@ export default function ResultLoader(props) {
                             {!copied ? <Unicons.UilCopy size={20} /> : <Unicons.UilCheck size={20} />}
                         </button>
                     </> : error ? <><Unicons.UilExclamationTriangle size={20} /> <div>{error}</div></> : null
-                    : <><Unicons.UilSpinner size={20} /> <div>Loading...</div></>
+                    : <><Unicons.UilSpinnerAlt className={styles.spinner} size={20} /> <div>Loading...</div></>
             }
         </div>
         : null)

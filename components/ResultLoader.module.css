@@ -27,6 +27,19 @@
     background-color: #EFEAFF;
 }
 
+.spinner {
+    animation: spinner 1s steps(12) infinite;
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotateZ(0deg)
+    }
+    100% {
+        transform: rotateZ(360deg)
+    }
+}
+
 @media screen and (max-width: 768px) {
     .main {
         padding: 10px;
