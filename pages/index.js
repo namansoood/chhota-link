@@ -11,9 +11,9 @@ export default function Home() {
 
   return (<Page>
     <>
-      <Form onSubmit={value => setState(state.concat([value]))} />
-      {state.length > 0 ? <ResultWrapper>
-        {state.map(value => <ResultLoader key={value} url={value} />)}
+      <Form onSubmit={value => setState([value].concat(state))} />
+      {state.length > 0 ? <ResultWrapper size={state.length}>
+        {state.map((value, idx) => <ResultLoader num={idx} key={idx} url={value} />)}
       </ResultWrapper> : null}
     </>
   </Page>)
