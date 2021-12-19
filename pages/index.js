@@ -12,9 +12,9 @@ export default function Home() {
   return (<Page>
     <>
       <Form onSubmit={value => setState(state.concat([value]))} />
-      <ResultWrapper>
+      {state.length > 0 ? <ResultWrapper>
         {state.map(value => <ResultLoader key={value} url={value} />)}
-      </ResultWrapper>
+      </ResultWrapper> : null}
     </>
   </Page>)
 }
