@@ -57,7 +57,7 @@ export default function ResultLoader(props) {
                                 setCopied(true);
                                 copy(toAbsoluteUrl(data))
                             }}>
-                            {!copied ? <Unicons.UilCopy size={16} /> : <Unicons.UilCheck size={16} />}
+                            {!copied ? <Unicons.UilCopy size={20} /> : <Unicons.UilCheck size={20} />}
                         </button>
                     </> : error ? <>{error}</> : null
                     : <>Loading...</>
