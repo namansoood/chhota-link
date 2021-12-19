@@ -12,9 +12,15 @@ export default function Home() {
   const containerRef = useRef(null)
 
   useEffect(() => {
+    let stored = localStorage.getItem("__cl_st") || ""
+    setState(stored.split(",").filter(value => value != ""))
+  }, [])
+
+  useEffect(() => {
     if (containerRef.current !== null) {
       containerRef.current.scrollTo(0, 0);
     }
+    window.localStorage.setItem("__cl_st", state.join(","))
   }, [state.length])
 
   return (<Page>
