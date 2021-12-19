@@ -1,16 +1,11 @@
 .main {
     width: 100%;
     padding: 12px;
-    gap: 8px;
+    gap: 12px;
     display: flex;
     align-items: center;
     color: #707070;
     height: 52px;
-}
-.main a {
-    flex-grow: 1;
-    text-align: left;
-    color: #6450FF;
 }
 
 .main button {
@@ -24,9 +19,12 @@
     cursor: pointer;
 }
 
-.main > .icon:not(:empty) {
+.main > .icon {
     padding: 8px 0;
     box-sizing: content-box;
+}
+.main > .icon:empty {
+    display: none;
 }
 
 .main button:hover {
@@ -35,6 +33,15 @@
 
 .spinner {
     animation: spinner 1s steps(12) infinite;
+}
+
+.short {
+    flex-grow: 1;
+    text-align: left;
+    color: #6450FF;
+}
+.trend {
+    max-width: 80px;
 }
 
 @keyframes spinner {
