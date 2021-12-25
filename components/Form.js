@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import styles from "./Form.module.css"
 
 import Toggle from "./Toggle"
@@ -7,6 +7,12 @@ export default function (props) {
     let [long, setLong] = useState("")
     let [private_, setPrivate] = useState(false)
     let inputRef = useRef(null)
+
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, [])
 
     return <>
         <form className={styles.form} onSubmit={e => {
