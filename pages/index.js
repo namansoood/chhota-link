@@ -8,6 +8,7 @@ import ResultLoader from "../components/ResultLoader.js"
 import ResultWrapper from "../components/ResultWrapper.js"
 
 import { getByUrl, getList } from "../utils/api.js";
+import { useStorage } from "../utils/storage.js"
 
 export default function Home() {
 
@@ -17,9 +18,12 @@ export default function Home() {
 
   const containerRef = useRef(null)
 
+
   useEffect(() => {
-    let stored = localStorage.getItem("__cl_st-v2") || ""
-    setState(stored.split(",").filter(value => value != ""))
+    let [get, _] = useStorage()
+
+    let stored = get() || []
+    setState(stored.filter(value => value != ""))
 
 
     getList()
@@ -37,10 +41,11 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
+    let [_, set] = useStorage()
     if (containerRef.current !== null) {
       containerRef.current.scrollTo(0, 0);
     }
-    window.localStorage.setItem("__cl_st-v2", state.join(","))
+    set(state)
   }, [state.length])
 
   let onSubmit = (value, private_) => {
