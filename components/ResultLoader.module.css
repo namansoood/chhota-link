@@ -1,4 +1,13 @@
 
+.main {
+    width: 100%;
+    padding: 12px;
+    gap: 12px;
+    display: flex;
+    align-items: center;
+    color: #707070;
+    height: 52px;
+}
 
 .spinner {
     animation: spinner 1s steps(12) infinite;
