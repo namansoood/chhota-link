@@ -23,7 +23,7 @@ export default function MainPage(props) {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Made by Naman Sood
+                    Made by <span className="shimmer">Naman Sood</span>
                 </a>
             </footer>
         </div>

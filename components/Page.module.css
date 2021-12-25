@@ -23,7 +23,9 @@
     padding: 12px;
     font-size: 16px;
     text-align: center;
+    color: #404040;
 }
+
 @media screen and (max-width: 768px) {
     .main {
         width: 100%;

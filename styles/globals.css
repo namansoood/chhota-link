@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Roboto', -apple-system, sans-serif;
 }
 
 html, body, body > div {
@@ -23,6 +24,27 @@ a {
 button {
   cursor: pointer;
   user-select: none;
+}
+
+.shimmer {
+    background: -webkit-linear-gradient(0deg, #4743FF, #8B62FF, #4743FF) 0% 0% / 200%;
+    background-clip: text;
+    -webkit-text-fill-color: #0000;
+    font-weight: bold;
+    animation: shimmer 1s 0s linear infinite;
+    animation-play-state: paused;
+}
+*:hover > .shimmer {
+    animation-play-state: running;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 100% 0%
+    }
+    100% {
+        background-position: -100% 0%
+    }
 }
 
 * {
