@@ -1,4 +1,4 @@
-const version = 4;
+const version = 5;
 
 function makeKey(v) {
     var v = v > 1 ? `-v${v}` : ""

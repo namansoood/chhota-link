@@ -11,30 +11,34 @@ export default async (req, res) => {
 
   if (typeof private_ === "boolean") {
     if (url) {
-      // validate passed url
-      try {
-        new URL(url);
-      } catch (_) {
-        res.status(400).json({ message: "Invalid URL passed." })
-        return false;
+      if (url.length >= 30) {
+        // validate passed url
+        try {
+          new URL(url);
+        } catch (_) {
+          res.status(400).json({ message: "Invalid URL passed." })
+          return false;
+        }
+
+        // read existing record of url
+        let matches = await db
+          .collection('primary')
+          .find({ destination: { $eq: url } })
+          .toArray();
+
+        let existing = matches[0]
+
+        // make an instance of new record if doesn't exist already
+        let record = existing ? existing : make(url, private_)
+
+        if (!existing) {
+          await db.collection('primary').insertOne(record)
+        }
+
+        res.status(200).json(record)
+      } else {
+        res.status(400).json({ message: "Given URL is not long enough." })
       }
-
-      // read existing record of url
-      let matches = await db
-        .collection('primary')
-        .find({ destination: { $eq: url } })
-        .toArray();
-
-      let existing = matches[0]
-
-      // make an instance of new record if doesn't exist already
-      let record = existing ? existing : make(url, private_)
-
-      if (!existing) {
-        await db.collection('primary').insertOne(record)
-      }
-
-      res.status(200).json(record)
     } else if (short) {
 
       // read existing record of url
@@ -53,6 +57,7 @@ export default async (req, res) => {
         }
 
         res.status(200).json({ ...make("", private_), ...existing })
+
       } else {
         res.status(404).json({ message: "Record not found with id '" + short + "'" })
       }
