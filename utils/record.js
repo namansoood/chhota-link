@@ -1,14 +1,14 @@
 
 import shortId from "shortid"
 
-export function make(url) {
+export function make(url, private_) {
     return {
         destination: url,
         hashed: shortId.generate(),
         createdAt: Date.now(),
         lastVisitedAt: null,
         clicks: [],
-        private: false,
+        private: private_,
     }
 }
 

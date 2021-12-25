@@ -2,18 +2,34 @@ import React, { useState, useRef, useEffect } from "react"
 
 import Page from "../components/Page.js"
 import Form from "../components/Form.js"
+import Result from '../components/Result';
 import ResultLoader from "../components/ResultLoader.js"
 import ResultWrapper from "../components/ResultWrapper.js"
 
 export default function Home() {
 
   let [state, setState] = useState([])
+  let [recentPublic, setRecentPublic] = useState([])
 
   const containerRef = useRef(null)
 
   useEffect(() => {
     let stored = localStorage.getItem("__cl_st") || ""
     setState(stored.split(",").filter(value => value != ""))
+
+
+    fetch("/api/get_list")
+      .then(res => {
+        if (res.status === 200) {
+          res.json().then(json => {
+            setRecentPublic(json)
+          }).catch(_ => console.error("Loading recents: Something went wrong"))
+        } else {
+          res.json().then(json => {
+            console.error("Loading recents:", json.message)
+          }).catch(_ => console.error("Loading recents: Something went wrong"))
+        }
+      })
   }, [])
 
   useEffect(() => {
@@ -26,8 +42,11 @@ export default function Home() {
   return (<Page>
     <>
       <Form onSubmit={value => setState([value].concat(state))} />
-      {state.length > 0 ? <ResultWrapper fwdRef={containerRef}>
+      {state.length > 0 ? <ResultWrapper title="Your Links" fwdRef={containerRef}>
         {state.map((value, idx) => <ResultLoader num={idx} key={idx} url={value} />)}
+      </ResultWrapper> : null}
+      {recentPublic.length > 0 ? <ResultWrapper title="Recent Links" fwdRef={containerRef}>
+        {recentPublic.map((data, idx) => <Result key={idx} data={data} />)}
       </ResultWrapper> : null}
     </>
   </Page>)

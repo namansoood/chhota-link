@@ -1,0 +1,48 @@
+.wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.switch {
+    background: #e0e0e0;
+    border-radius: 1000px;
+    width: 40px;
+    height: 20px;
+    position: relative;
+}
+
+.switch input[type="checkbox"] {
+    visibility: hidden;
+}
+
+.switch > .handle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+}
+
+.label {
+    color: #404040;
+    font-size: 14px;
+}
+
+[value="true"] > .switch > .handle {
+    background-color: #4743FF;
+    right: 0px;
+}
+
+[value="false"] > .switch > .handle {
+    background-color: #909090;
+    left: 0px;
+}
+
+[value="true"]:focus > .switch > .handle {
+    box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px #4743FF;
+}
+
+[value="false"]:focus > .switch > .handle {
+    box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px #909090;
+}

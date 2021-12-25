@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./ResultLoader.module.css";
-import { toAbsoluteUrl, getWeeklyTrend } from "../utils/record";
-
-import Trend from "react-trend"
-
-import copy from 'copy-to-clipboard';
 import * as Unicons from '@iconscout/react-unicons';
+import Result from './Result';
 
 export default function ResultLoader(props) {
     let [loading, setLoading] = useState(false)
     let [data, setData] = useState(undefined)
     let [error, setError] = useState(undefined)
-    let [copied, setCopied] = useState(false)
 
     let run = () => {
         setData(undefined);
@@ -38,13 +33,6 @@ export default function ResultLoader(props) {
 
     useEffect(run, [])
     useEffect(run, [props.url])
-    useEffect(() => {
-        if (copied) {
-            setTimeout(() => {
-                setCopied(false)
-            }, 1500)
-        }
-    }, [copied])
 
     return (data || loading || error ?
         <div className={styles.main}>
@@ -53,34 +41,7 @@ export default function ResultLoader(props) {
             </div>
             {
                 data || error ?
-                    data ? <>
-                        <div className={styles.short}>
-                            <a href={"/" + data.hashed}>{toAbsoluteUrl(data)}</a>
-                        </div>
-                        <div className={styles.trend} title="Trend">
-                            <Trend
-                                smooth
-                                autoDraw
-                                autoDrawDuration={1500}
-                                autoDrawEasing="ease-out"
-                                data={getWeeklyTrend(data)}
-                                gradient={['#4743FF', '#8B62FF']}
-                                radius={10}
-                                strokeWidth={6}
-                                strokeLinecap={'butt'} />
-                        </div>
-                        <div className={styles.copy}>
-                            <button
-                                title="Copy Link"
-                                className={styles.button}
-                                onClick={e => {
-                                    setCopied(true);
-                                    copy(toAbsoluteUrl(data))
-                                }}>
-                                {!copied ? <Unicons.UilCopy size={20} /> : <Unicons.UilCheck size={20} />}
-                            </button>
-                        </div>
-                    </> : error ? <><div>{error}</div></> : null
+                    data ? <Result data={data} /> : error ? <><div>{error}</div></> : null
                     : <> <div>Loading...</div></>
             }
         </div>
