@@ -7,7 +7,7 @@
 }
 
 .switch {
-    background: #e0e0e0;
+    background: #f0f0f0;
     border-radius: 1000px;
     width: 40px;
     height: 20px;
@@ -42,11 +42,11 @@
 }
 
 [value="true"] > .switch > .handle {
-    background-color: #4743FF;
+    background-color: #8B62FF;
     left: auto;
     right: 0px;
 }
 
 [value="true"]:focus > .switch > .handle {
-    box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px #4743FF;
+    box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px #8B62FF;
 }
