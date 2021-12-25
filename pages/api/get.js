@@ -11,14 +11,14 @@ export default async (req, res) => {
 
   if (typeof private_ === "boolean") {
     if (url) {
+      // validate passed url
+      try {
+        new URL(url);
+      } catch (_) {
+        res.status(400).json({ message: "Invalid URL passed." })
+        return false;
+      }
       if (url.length >= 30) {
-        // validate passed url
-        try {
-          new URL(url);
-        } catch (_) {
-          res.status(400).json({ message: "Invalid URL passed." })
-          return false;
-        }
 
         // read existing record of url
         let matches = await db
