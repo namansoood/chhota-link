@@ -27,7 +27,7 @@ export default function (props) {
         }}>
             <input ref={inputRef} className={styles.input} onChange={e => setLong(e.currentTarget.value)} value={long} placeholder="Paste a link to shorten it" />
             <div>
-                <div className={styles.toggle}><Toggle label="Private" onChange={value => { setPrivate(value) }} /></div>
+                <div className={styles.toggle}><Toggle label={private_ ? "Private" : "Public"} onChange={value => { setPrivate(value) }} /></div>
                 <button type="submit" className={styles.button}>Do Your Magic</button>
             </div>
         </form>

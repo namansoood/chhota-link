@@ -1,6 +1,6 @@
 .wrapper {
     display: inline-flex;
-    gap: 8px;
+    gap: 12px;
     align-items: center;
     cursor: pointer;
     user-select: none;
@@ -24,6 +24,8 @@
     border-radius: 50%;
     position: absolute;
     top: 0;
+    left: 0;
+    transition: 150ms 0s ease;
 }
 
 .label {
@@ -33,20 +35,19 @@
 
 .switch > .handle {
     background-color: #909090;
-    left: 0px;
-    right: auto;
 }
 
-:focus > .switch > .handle {
+:focus > .switch > .handle,
+:active > .switch > .handle {
     box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px #909090;
 }
 
 [value="true"] > .switch > .handle {
     background-color: #8B62FF;
-    left: auto;
-    right: 0px;
+    left: 25px;
 }
 
-[value="true"]:focus > .switch > .handle {
+[value="true"]:focus > .switch > .handle,
+[value="true"]:active > .switch > .handle {
     box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px #8B62FF;
 }
