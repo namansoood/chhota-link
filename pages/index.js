@@ -18,7 +18,7 @@ export default function Home() {
   const containerRef = useRef(null)
 
   useEffect(() => {
-    let stored = localStorage.getItem("__cl_st") || ""
+    let stored = localStorage.getItem("__cl_st-v2") || ""
     setState(stored.split(",").filter(value => value != ""))
 
 
@@ -40,7 +40,7 @@ export default function Home() {
     if (containerRef.current !== null) {
       containerRef.current.scrollTo(0, 0);
     }
-    window.localStorage.setItem("__cl_st", state.join(","))
+    window.localStorage.setItem("__cl_st-v2", state.join(","))
   }, [state.length])
 
   let onSubmit = (value, private_) => {
