@@ -1,5 +1,6 @@
 import Head from "next/head"
 import styles from "./Page.module.css"
+import Logo from "./Logo"
 
 export default function MainPage(props) {
     return (<>
@@ -8,6 +9,10 @@ export default function MainPage(props) {
             <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className={styles.container}>
+            <header className={styles.header}>
+                <Logo />
+            </header>
+
             <main className={styles.main} >
                 {props.children}
             </main>

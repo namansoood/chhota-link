@@ -1,0 +1,10 @@
+.wrapper {
+    font-size: 24px;
+    font-weight: 600;
+    color: #8B62FF;
+    display: inline-flex;
+    align-items: center;
+    padding: 12px;
+    gap: 12px;
+    user-select: none;
+}
