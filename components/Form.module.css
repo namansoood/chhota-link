@@ -7,10 +7,12 @@
     background-color: #fff;
     height: 60px;
     align-items: center;
+    cursor: text;
 }
 .form > div {
     display: flex;
     align-items: center;
+    text-align: left;
     height: 100%;
 }
 

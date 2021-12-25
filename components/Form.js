@@ -15,7 +15,7 @@ export default function (props) {
     }, [])
 
     return <>
-        <form className={styles.form} onSubmit={e => {
+        <form className={styles.form} onClick={e => inputRef.current.focus()} onSubmit={e => {
             e.preventDefault();
             if (long !== "") {
                 props.onSubmit(long, private_);
