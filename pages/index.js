@@ -7,6 +7,8 @@ import Error from "../components/Error";
 import ResultLoader from "../components/ResultLoader.js"
 import ResultWrapper from "../components/ResultWrapper.js"
 
+import { getByUrl, getList } from "../utils/api.js";
+
 export default function Home() {
 
   let [state, setState] = useState([])
@@ -20,7 +22,7 @@ export default function Home() {
     setState(stored.split(",").filter(value => value != ""))
 
 
-    fetch("/api/get_list")
+    getList()
       .then(res => {
         if (res.status === 200) {
           res.json().then(json => {
@@ -41,23 +43,24 @@ export default function Home() {
     window.localStorage.setItem("__cl_st", state.join(","))
   }, [state.length])
 
+  let onSubmit = (value, private_) => {
+    setError(undefined)
+    getByUrl(value, private_).then(res => {
+      if (res.status === 200) {
+        res.json().then(json => {
+          setState([json.destination].concat(state))
+        }).catch(_ => setError("Something went wrong"))
+      } else {
+        res.json().then(json => {
+          setError(json.message)
+        }).catch(_ => setError("Something went wrong"))
+      }
+    })
+  }
+
   return (<Page>
     <>
-      <Form onSubmit={(value, private_) => {
-        setError(undefined)
-        fetch(`/api/get?url=${value}&private=${private_ ? "true" : "false"}`)
-          .then(res => {
-            if (res.status === 200) {
-              res.json().then(json => {
-                setState([json.destination].concat(state))
-              }).catch(_ => setError("Something went wrong"))
-            } else {
-              res.json().then(json => {
-                setError(json.message)
-              }).catch(_ => setError("Something went wrong"))
-            }
-          })
-      }} />
+      <Form onSubmit={onSubmit} />
       <Error error={error} />
       {state.length > 0 ? <ResultWrapper title="Your Links" fwdRef={containerRef}>
         {state.map((value, idx) => <ResultLoader num={idx} key={idx} url={value} />)}

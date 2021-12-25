@@ -3,6 +3,8 @@ import styles from "./ResultLoader.module.css";
 import * as Unicons from '@iconscout/react-unicons';
 import Result from './Result';
 
+import { getByUrl } from '../utils/api';
+
 export default function ResultLoader(props) {
     let [loading, setLoading] = useState(false)
     let [data, setData] = useState(undefined)
@@ -15,7 +17,7 @@ export default function ResultLoader(props) {
             return null;
         } else {
             setLoading(true)
-            fetch("/api/get?url=" + props.url)
+            getByUrl(props.url)
                 .then(res => {
                     setLoading(false);
                     if (res.status === 200) {

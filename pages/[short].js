@@ -1,10 +1,8 @@
-const dev = process.env.NODE_ENV !== 'production';
-
-const origin = dev ? 'http://localhost:3001' : 'https://chhotal.ink';
+import { getByShort } from "../utils/api";
 
 export async function getServerSideProps(context) {
     console.log("context", context);
-    const res = await fetch(`${origin}/api/get?short=${context.query.short}&visit=true`)
+    const res = await getByShort(context.query.short, true)
     const data = await res.json()
     if (data.destination) {
         return {

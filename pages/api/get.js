@@ -60,6 +60,6 @@ export default async (req, res) => {
       res.status(400).json({ message: "Missing 'url' query param" })
     }
   } else {
-    res.status(400).json({ message: "Type error: 'private' query param expected a boolean" })
+    res.status(400).json({ message: "Type error: 'private' query param must be a boolean" })
   }
 }
