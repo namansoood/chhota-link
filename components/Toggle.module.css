@@ -29,20 +29,20 @@
     font-size: 14px;
 }
 
+.switch > .handle {
+    background-color: #909090;
+    left: 0px;
+}
+
+:focus > .switch > .handle {
+    box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px #909090;
+}
+
 [value="true"] > .switch > .handle {
     background-color: #4743FF;
     right: 0px;
 }
 
-[value="false"] > .switch > .handle {
-    background-color: #909090;
-    left: 0px;
-}
-
 [value="true"]:focus > .switch > .handle {
     box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px #4743FF;
-}
-
-[value="false"]:focus > .switch > .handle {
-    box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px #909090;
 }
