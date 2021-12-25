@@ -18,6 +18,7 @@ export default async (req, res) => {
         res.status(400).json({ message: "Invalid URL passed." })
         return false;
       }
+      // validate url length, smaller than 30 is already short!
       if (url.length >= 30) {
 
         // read existing record of url
