@@ -2,13 +2,15 @@ import React, { useState, useRef, useEffect } from "react"
 
 import Page from "../components/Page.js"
 import Form from "../components/Form.js"
-import Result from '../components/Result';
+import Result from "../components/Result";
+import Error from "../components/Error";
 import ResultLoader from "../components/ResultLoader.js"
 import ResultWrapper from "../components/ResultWrapper.js"
 
 export default function Home() {
 
   let [state, setState] = useState([])
+  let [error, setError] = useState(undefined)
   let [recentPublic, setRecentPublic] = useState([])
 
   const containerRef = useRef(null)
@@ -41,7 +43,22 @@ export default function Home() {
 
   return (<Page>
     <>
-      <Form onSubmit={value => setState([value].concat(state))} />
+      <Form onSubmit={(value, private_) => {
+        setError(undefined)
+        fetch(`/api/get?url=${value}&private=${private_ ? "true" : "false"}`)
+          .then(res => {
+            if (res.status === 200) {
+              res.json().then(json => {
+                setState([json.destination].concat(state))
+              }).catch(_ => setError("Something went wrong"))
+            } else {
+              res.json().then(json => {
+                setError(json.message)
+              }).catch(_ => setError("Something went wrong"))
+            }
+          })
+      }} />
+      <Error error={error} />
       {state.length > 0 ? <ResultWrapper title="Your Links" fwdRef={containerRef}>
         {state.map((value, idx) => <ResultLoader num={idx} key={idx} url={value} />)}
       </ResultWrapper> : null}
