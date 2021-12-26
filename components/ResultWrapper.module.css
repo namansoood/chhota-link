@@ -20,14 +20,42 @@
 }
 
 .header {
+    display: flex;
     padding: 20px;
     width: 100%;
     text-align: left;
     border-bottom: 1px solid #f0f0f0;
+    align-items: center;
 }
+
+.header > .left {
+    flex-grow: 1;
+}
+
+.header > .right {
+    font-size: 12px;
+}
+
 .header, .content {
     font-size: 16px;
 }
+
+select.dropdown {
+    padding: 3px 4px;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 5px;
+}
+
+select.dropdown:hover {
+    border-color: rgba(0,0,0,.45)
+}
+
+select.dropdown:focus {
+    border-color: rgb(96 79 255);
+    box-shadow: 0 0 0 1px rgb(96 79 255)
+}
+
+
 @media screen and (max-width: 768px) {
     .header {
         padding: 10px;

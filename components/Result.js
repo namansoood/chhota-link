@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styles from "./Result.module.css";
-import { toAbsoluteUrl, getWeeklyTrend } from "../utils/record";
+import { toAbsoluteUrl, getTrend } from "../utils/record";
 
 import Trend from "react-trend"
 
 import copy from 'copy-to-clipboard';
 import * as Unicons from '@iconscout/react-unicons';
 
+import TrendRangeContext from "./utils/TrendRangeContext"
+
 export default function Result(props) {
+    let trendRange = useContext(TrendRangeContext)
+
     let [copied, setCopied] = useState(false)
     useEffect(() => {
         if (copied) {
@@ -18,7 +22,7 @@ export default function Result(props) {
     }, [copied])
 
     function renderTrendGraph() {
-        let data = getWeeklyTrend(props.data)
+        let data = getTrend(props.data, trendRange)
 
         return <Trend
             smooth
