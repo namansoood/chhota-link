@@ -1,3 +1,3 @@
 # Chhota Link
 
-IDK.
+Just another link shortner.
