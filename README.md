@@ -2,7 +2,7 @@
 
 Just another link shortner -- https://chhotal.ink
 
-##API:
+## API:
 Long to short:
 ```https://chhotal.ink/api/get?url=<LONG URL>```
 
