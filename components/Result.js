@@ -3,11 +3,11 @@ import styles from "./Result.module.css";
 import { toAbsoluteUrl, getTrend } from "../utils/record";
 
 import Trend from "react-trend"
-
 import copy from 'copy-to-clipboard';
 import * as Unicons from '@iconscout/react-unicons';
 
 import TrendRangeContext from "./utils/TrendRangeContext"
+import Detailed from "./Detailed"
 
 export default function Result(props) {
     let trendRange = useContext(TrendRangeContext)
@@ -36,7 +36,7 @@ export default function Result(props) {
             strokeLinecap={'butt'} />
     }
 
-    return <div className={styles.main}>
+    return <><div className={styles.main}>
         <div className={styles.long}>
             <a href={props.data.destination}>{props.data.destination}</a>
         </div>
@@ -57,5 +57,16 @@ export default function Result(props) {
                 {!copied ? <Unicons.UilCopy size={20} /> : <Unicons.UilCheck size={20} />}
             </button>
         </div>
+        <div className={styles.copy}>
+            <button
+                title="More Info"
+                className={styles.button}
+                onClick={e => {
+                    window.location.href = "/info/" + props.data.hashed
+                }}>
+                <Unicons.UilAngleRight size={20} />
+            </button>
+        </div>
     </div>
+    </>
 }

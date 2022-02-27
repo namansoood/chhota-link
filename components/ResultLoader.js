@@ -36,16 +36,18 @@ export default function ResultLoader(props) {
     useEffect(run, [])
     useEffect(run, [props.url])
 
-    return (data || loading || error ?
-        <div className={styles.main}>
+    let renderLoader = () => {
+        return <div className={styles.loader}>
             <div className={styles.icon}>
                 {data || error ? (data ? null : <Unicons.UilExclamationTriangle size={20} />) : <Unicons.UilSpinnerAlt className={styles.spinner} size={20} />}
             </div>
-            {
-                data || error ?
-                    data ? <Result data={data} /> : error ? <><div>{error}</div></> : null
-                    : <> <div>Loading...</div></>
-            }
+            <div>{error ? { error } : "Loading..."}</div>
+        </div>
+    }
+
+    return (data || loading || error ?
+        <div className={styles.main}>
+            {data ? <Result data={data} /> : renderLoader()}
         </div>
         : null)
 }

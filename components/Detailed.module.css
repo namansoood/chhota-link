@@ -1,0 +1,8 @@
+.wrapper {
+    font-family: consolas, monospace;
+    overflow: auto;
+    width: 100%;
+    white-space: pre-wrap;
+    text-align: left;
+    font-size: 12px;
+}
