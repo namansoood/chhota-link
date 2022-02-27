@@ -12,9 +12,9 @@ export function make(url, private_) {
     }
 }
 
-export function countClick(record) {
+export function recordClick(record, userAgent, language, referrer) {
     let clicks = Array.isArray(record.clicks) ? record.clicks : []
-    clicks.push(Date.now())
+    clicks.push({ t: Date.now(), u: userAgent, l: language, r: referrer })
 
     return { ...record, clicks: clicks, lastVisitedAt: Date.now() }
 }
@@ -71,17 +71,18 @@ export function getTrend(data, range = "daily") {
         return result;
     }
     let daily = data.clicks.reduce((acc, value) => {
-        let date = new Date(value);
+        let timestamp = value.hasOwnProperty("t") ? value.t : value
+        let date = new Date(timestamp);
         let last = acc[acc.length - 1]
         if (last) {
             let date2 = new Date(last[0]);
             if (compare(date, date2)) {
-                acc[acc.length - 1].push(value)
+                acc[acc.length - 1].push(timestamp)
             } else {
-                acc.push([value])
+                acc.push([timestamp])
             }
         } else {
-            acc.push([value])
+            acc.push([timestamp])
         }
         return acc;
     }, []).map(clicks => clicks.length)

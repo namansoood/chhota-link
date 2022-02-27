@@ -6,7 +6,6 @@ function makeKey(v) {
 }
 
 export function useStorage() {
-    // delete records of previous versions
     for (let i = 0; i < version; i++) {
         window.localStorage.removeItem(makeKey(i))
     }
