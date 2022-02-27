@@ -12,11 +12,12 @@
     flex-direction: column;
     flex-grow: 1;
     text-align: center;
-    justify-content: center;
+    justify-content: flex-start;
     width: 50%;
     padding: 12px;
     gap: 29px;
     overflow: hidden;
+    min-height: calc(100vh - 100px);
 }
 
 .footer {
