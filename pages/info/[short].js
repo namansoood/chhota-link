@@ -3,7 +3,7 @@ import Page from "../../components/Page.js"
 import Detailed from "../../components/Detailed.js"
 
 export async function getServerSideProps(context) {
-    const res = await getByShort(context.query.short, true, context.req.headers)
+    const res = await getByShort(context.query.short, false, context.req.headers)
     const data = await res.json()
     if (data) {
         return {
